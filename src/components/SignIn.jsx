@@ -5,6 +5,8 @@ import * as yup from 'yup';
 import FormikTextInput from './FormikTextInput';
 import Text from './Text';
 import theme from "../theme";
+import useSignIn from "../hooks/useSignIn";
+import {useNavigate} from "react-router-native";
 
 const styles = StyleSheet.create({
     container: {
@@ -23,6 +25,9 @@ const styles = StyleSheet.create({
 });
 
 const SignIn = () => {
+    const [signIn] = useSignIn();
+    const navigate = useNavigate();
+
     const initialValues = {
         username: '',
         password: '',
@@ -31,16 +36,27 @@ const SignIn = () => {
     const validationSchema = yup.object().shape({
         username: yup
             .string()
-            .min(6, 'Username must contain at least 6 characters')
+            .min(2, 'Username must contain at least 2 characters')
             .required('Username is required'),
         password: yup
             .string()
-            .min(8, 'Password must contain at least 8 characters')
+            .min(3, 'Password must contain at least 3 characters')
             .required('Password is required'),
     });
 
-    const onSubmit = (values) => {
+    const onSubmit = async (values) => {
         console.log("sign in input: ", values);
+        const {username, password} = values;
+
+        try {
+            const {data} = await signIn({username, password});
+            console.log("sign in result: ", data);
+            if (data.authenticate.accessToken) {
+                navigate('/');
+            }
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     return (
