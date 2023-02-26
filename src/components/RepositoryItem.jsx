@@ -38,19 +38,19 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = ({item}) => {
     return (
-        <View style={styles.container}>
+        <View style={styles.container} testID="repoItem">
             <Image style={styles.avatar} source={{uri: item.ownerAvatarUrl}}/>
             <View>
-                <Text style={styles.name} fontWeight='bold' fontSize='subheading'>{item.fullName}</Text>
-                <Text style={styles.language} backgroundColor='primary' color='white'>{item.language}</Text>
+                <Text style={styles.name} fontWeight='bold' fontSize='subheading' testID='repoName'>{item.fullName}</Text>
+                <Text style={styles.language} backgroundColor='primary' color='white' testID='repoLanguage'>{item.language}</Text>
             </View>
-            <Text style={styles.description}>{item.description}</Text>
+            <Text style={styles.description} testID='repoDescription'>{item.description}</Text>
 
-            <View style={styles.statRow}>
-                <Stat statItem="Stars" stat={item.stargazersCount}/>
-                <Stat statItem="Forks" stat={item.forksCount}/>
-                <Stat statItem="Reviews" stat={item.reviewCount}/>
-                <Stat statItem="Rating" stat={item.ratingAverage}/>
+            <View style={styles.statRow} >
+                <Stat label="Stars" count={item.stargazersCount}/>
+                <Stat label="Forks" count={item.forksCount}/>
+                <Stat label="Reviews" count={item.reviewCount}/>
+                <Stat label="Rating" count={item.ratingAverage}/>
             </View>
         </View>
     );
