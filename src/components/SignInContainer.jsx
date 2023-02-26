@@ -11,7 +11,7 @@ const SignInContainer = ({onSubmit}) => {
             display: 'flex',
             alignItems: 'center'
         },
-        signin: {
+        button: {
             width: 300,
             height: 40,
             marginTop: 15,
@@ -50,7 +50,7 @@ const SignInContainer = ({onSubmit}) => {
                         <FormikTextInput name='username' placeholder='Username' />
                         <FormikTextInput name='password' placeholder='Password' secureTextEntry />
                         <Pressable onPress={handleSubmit}>
-                            <Text style={styles.signin} color='white' fontWeight='bold'>Sign In</Text>
+                            <Text style={styles.button} color='white' fontWeight='bold'>Sign In</Text>
                         </Pressable>
                     </View>
                 );

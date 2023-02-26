@@ -7,7 +7,8 @@ const theme = {
         cardBackground: '#afafaf',
         primary: '#0366d6',
         white: '#FFFFFF',
-        error: '#d73a4a',
+        red: '#d73a4a',
+        lightgrey: '#d7d7d7',
     },
     fontSizes: {
         body: 14,

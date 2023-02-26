@@ -7,7 +7,7 @@ import theme from "../theme";
 
 const styles = StyleSheet.create({
     errorMsg: {
-        color: theme.colors.error
+        color: theme.colors.red
     },
 });
 const FormikTextInput = ({ name, ...props }) => {

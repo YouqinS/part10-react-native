@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet } from 'react-native';
+import {View, Image, StyleSheet, Pressable, Linking} from 'react-native';
 import Text from './Text';
 import Stat from "./Stat";
 import theme from "../theme";
@@ -34,24 +34,38 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
+    button: {
+        width: "80%",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 5,
+        marginTop: 15,
+        borderRadius: 5,
+    }
 });
 
-const RepositoryItem = ({item}) => {
+const RepositoryItem = ({repository, singleRepoView}) => {
     return (
         <View style={styles.container} testID="repoItem">
-            <Image style={styles.avatar} source={{uri: item.ownerAvatarUrl}}/>
+            <Image style={styles.avatar} source={{uri: repository.ownerAvatarUrl}}/>
             <View>
-                <Text style={styles.name} fontWeight='bold' fontSize='subheading' testID='repoName'>{item.fullName}</Text>
-                <Text style={styles.language} backgroundColor='primary' color='white' testID='repoLanguage'>{item.language}</Text>
+                <Text style={styles.name} fontWeight='bold' fontSize='subheading' testID='repoName'>{repository.fullName}</Text>
+                <Text style={styles.language} backgroundColor='primary' color='white' testID='repoLanguage'>{repository.language}</Text>
             </View>
-            <Text style={styles.description} testID='repoDescription'>{item.description}</Text>
+            <Text style={styles.description} testID='repoDescription'>{repository.description}</Text>
 
             <View style={styles.statRow} >
-                <Stat label="Stars" count={item.stargazersCount}/>
-                <Stat label="Forks" count={item.forksCount}/>
-                <Stat label="Reviews" count={item.reviewCount}/>
-                <Stat label="Rating" count={item.ratingAverage}/>
+                <Stat label="Stars" count={repository.stargazersCount}/>
+                <Stat label="Forks" count={repository.forksCount}/>
+                <Stat label="Reviews" count={repository.reviewCount}/>
+                <Stat label="Rating" count={repository.ratingAverage}/>
             </View>
+            {singleRepoView &&
+                <Pressable style={{ alignItems: 'center' }} onPress={() => Linking.openURL(repository.url)}>
+                    <Text style={styles.button} color='white' backgroundColor='primary' fontWeight='bold' fontSize='subheading'>Open in GitHub</Text>
+                </Pressable>
+            }
         </View>
     );
 };

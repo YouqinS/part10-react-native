@@ -1,4 +1,4 @@
-import {View, StyleSheet, Pressable} from 'react-native';
+import {View, StyleSheet, Pressable, ScrollView} from 'react-native';
 import {Link, useNavigate} from 'react-router-native';
 
 import Text from './Text';
@@ -31,7 +31,7 @@ const AppBarTab = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Link to='/'>
                 <Text style={styles.padding} color='white' fontWeight='bold' fontSize='subheading'>
                     Repositories
@@ -39,19 +39,38 @@ const AppBarTab = () => {
             </Link>
             {!queryMe.loading && !queryMe.data.me
                 ?
+                <>
                 <Pressable onPress={() => navigate('/signin')}>
                     <Text style={styles.padding} color='white' fontWeight='bold' fontSize='subheading'>
                         Sign in
                     </Text>
                 </Pressable>
+                    <Pressable onPress={() => navigate('/signup')}>
+                        <Text style={styles.padding} color='white' fontWeight='bold' fontSize='subheading'>
+                            Sign up
+                        </Text>
+                    </Pressable>
+                </>
                 :
+                <>
+                <Pressable onPress={() => navigate('/createReview')}>
+                    <Text style={styles.padding} color='white' fontWeight='bold' fontSize='subheading'>
+                        Create a review
+                    </Text>
+                </Pressable>
+                <Pressable onPress={() => navigate('/myReviews')}>
+                <Text style={styles.padding} color='white' fontWeight='bold' fontSize='subheading'>
+                My reviews
+                </Text>
+                </Pressable>
                 <Pressable onPress={signOut}>
                     <Text style={styles.padding} color='white' fontWeight='bold' fontSize='subheading'>
                         Sign out
                     </Text>
                 </Pressable>
+                </>
             }
-        </View>
+        </ScrollView>
     );
 };
 
